@@ -16,18 +16,7 @@ class LoginRepository {
 
     fun signIn(user: User) = service.signIn(user)
 
-     fun signUp(user: User) : LiveData<User> {
-        return liveData<User> {
-            val data = service.signUp(user)
-            Log.d("MyOut", "Viewmodel  update")
-           // emit(data)
-        }
-    }
-
-     fun signUp2(user: User) = service.signUp(user)
-
-
-
+    fun signUp(user: User) = service.signUp(user)
 
     fun getUser() = userLiveData as LiveData<User>
 

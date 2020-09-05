@@ -12,11 +12,14 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.uninorte.a_202030_courseinfowithlogin.R
 import com.uninorte.a_202030_courseinfowithlogin.model.User
+import com.uninorte.a_202030_courseinfowithlogin.viewmodel.CourseViewModel
 import com.uninorte.a_202030_courseinfowithlogin.viewmodel.LoginViewModel
 
 class LoginFragment : Fragment() {
 
     val loginViewModel: LoginViewModel by activityViewModels()
+    val courseViewModel: CourseViewModel by activityViewModels()
+    var theToken : String = ""
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -30,26 +33,13 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        loginViewModel.getUser().observe(getViewLifecycleOwner(), Observer { user ->
-            run {
-                if (user != null) {
-                    Log.d("MyOut", "Fragment  userLiveData " + user + " error " + user.error)
-                    if (user.token != "") {
-                        Toast.makeText(context, "Token " + user.token, Toast.LENGTH_LONG).show()
-                    } else {
-                        Toast.makeText(context, "Token failure " + user.error, Toast.LENGTH_LONG)
-                            .show()
-                    }
-                }
-            }
-        })
-
         view.findViewById<Button>(R.id.signInButton).setOnClickListener {
             val email : String =  "334dd@33.com"
             val clave : String = "123456"
             loginViewModel.signIn(email,clave).observe(getViewLifecycleOwner(), Observer { user ->
 
-                Log.d("MyOut", "Fragment  userLiveData222 " + user + " error " + user.error)
+                Log.d("MyOut", "Fragment  signIn " + user + " error " + user.error)
+                theToken = user.token
                 if (user.token != "") {
                     Toast.makeText(context, "Token22 " + user.token, Toast.LENGTH_LONG).show()
                 } else {
@@ -65,15 +55,22 @@ class LoginFragment : Fragment() {
             val clave : String = "123456"
             loginViewModel.signUp(email,clave).observe(getViewLifecycleOwner(), Observer { user ->
 
-                    Log.d("MyOut", "Fragment  userLiveData222 " + user + " error " + user.error)
-                    if (user.token != "") {
-                        Toast.makeText(context, "Token22 " + user.token, Toast.LENGTH_LONG).show()
-                    } else {
-                        Toast.makeText(context, "Token22 failure " + user.error, Toast.LENGTH_LONG)
-                            .show()
-                    }
+                    Log.d("MyOut", "Fragment  signUp " + user + " error " + user.error)
+                    theToken = user.token
+
 
             })
         }
+
+        view.findViewById<Button>(R.id.buttonGetCourses).setOnClickListener {
+            val usuario : String = "334dd@33.com"
+            courseViewModel.getCourses(usuario,theToken).observe(getViewLifecycleOwner(), Observer { courses ->
+
+                Log.d("MyOut", "Fragment  userLiveData222 ")
+
+            })
+        }
+
+
     }
 }

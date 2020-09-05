@@ -45,7 +45,19 @@ class LoginFragment : Fragment() {
         })
 
         view.findViewById<Button>(R.id.signInButton).setOnClickListener {
-          //  loginViewModel.signIn("a@a.com","123456")
+            val email : String =  "334dd@33.com"
+            val clave : String = "123456"
+            loginViewModel.signIn(email,clave).observe(getViewLifecycleOwner(), Observer { user ->
+
+                Log.d("MyOut", "Fragment  userLiveData222 " + user + " error " + user.error)
+                if (user.token != "") {
+                    Toast.makeText(context, "Token22 " + user.token, Toast.LENGTH_LONG).show()
+                } else {
+                    Toast.makeText(context, "Token22 failure " + user.error, Toast.LENGTH_LONG)
+                        .show()
+                }
+
+            })
         }
 
         view.findViewById<Button>(R.id.signUpButton).setOnClickListener {

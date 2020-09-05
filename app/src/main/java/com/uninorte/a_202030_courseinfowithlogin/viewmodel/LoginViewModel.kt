@@ -11,32 +11,13 @@ class LoginViewModel : ViewModel(){
 
     var userLiveData = MutableLiveData<User>()
 
-
     private val repository = LoginRepository()
-    public fun signIn(email: String, clave: String) {
-        viewModelScope.launch {
 
-        }
-    }
+    public fun signIn(email: String, clave: String) = repository.signIn(User(email, clave, email, email,"",""))
+
 
     fun getUser() = userLiveData
 
-     fun signUp(email: String, clave: String) : MutableLiveData<User>{
+     fun signUp(email: String, clave: String) = repository.signUp2(User(email, clave, email, email,"",""))
 
-         return repository.signUp2(User(email, clave, email, email,"",""))
-        viewModelScope.launch {
-
-        }
-
-        // viewModelScope.launch {
-      //       userLiveData.value =  repository.signUp2(User(email, clave, email, email,"","")).asLiveData()
-        // }
-
-         //this.userLiveData = liveData {
-         //    emit(repository.signUp2(User(email, clave, email, email,"","")))
-        // }
-       // userLiveData.value = repository.signUp(myUser)
-
-
-    }
 }

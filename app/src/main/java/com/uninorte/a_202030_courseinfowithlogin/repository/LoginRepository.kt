@@ -12,11 +12,9 @@ class LoginRepository {
 
     var userLiveData = MutableLiveData<User>()
 
-
-
     private val service = LoginApiService()
 
-    suspend fun signIn(user: User) = service.signIn(user)
+    fun signIn(user: User) = service.signIn(user)
 
      fun signUp(user: User) : LiveData<User> {
         return liveData<User> {

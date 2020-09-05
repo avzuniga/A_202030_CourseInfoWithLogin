@@ -34,8 +34,34 @@ class LoginApiService {
     }
 
 
-    suspend fun signIn(user: User) {
+     fun signIn(user: User) : MutableLiveData<User>{
+        val userResponse = MutableLiveData<User>()
 
+         getRestEngine().signIn(user).enqueue(object: Callback<User>{
+             override fun onResponse(call: Call<User>, response: Response<User>) {
+                 if (response.isSuccessful) {
+                     Log.d("MyOut", "OK isSuccessful " + response.body())
+                     val loginResponse = response.body()
+                     if (loginResponse != null) {
+                         user.token = loginResponse.token
+                         Log.d("MyOut", "OK isSuccessful token " + user.token)
+                         userResponse.value = user
+                     }
+                 } else {
+                     Log.d("MyOut", "NOK  "+response.code() )
+                     user.error = response.errorBody().toString()
+                     user.token = ""
+                     userResponse.value = user
+                 }
+             }
+
+             override fun onFailure(call: Call<User>, t: Throwable) {
+                 Log.d("MyOut","Failure "+t.message)
+             }
+
+         })
+
+        return userResponse
     }
 
     fun signUp(user: User) : MutableLiveData<User> {

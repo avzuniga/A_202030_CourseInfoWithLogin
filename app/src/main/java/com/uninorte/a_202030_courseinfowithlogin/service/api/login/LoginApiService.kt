@@ -1,17 +1,13 @@
-package com.uninorte.a_202030_courseinfowithlogin.repository.api.login
+package com.uninorte.a_202030_courseinfowithlogin.service.api.login
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.gson.Gson
-import com.uninorte.a_202030_courseinfowithlogin.model.APIError
 import com.uninorte.a_202030_courseinfowithlogin.model.User
 import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
-import java.io.IOException
 
 
 class LoginApiService {

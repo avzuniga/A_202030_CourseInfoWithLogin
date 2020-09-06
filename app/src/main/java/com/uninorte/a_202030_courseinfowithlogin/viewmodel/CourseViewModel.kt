@@ -18,4 +18,9 @@ class CourseViewModel : ViewModel() {
         return repository.getCourses(user, token)
     }
 
+    fun addCourse(user: String, token: String) : MutableLiveData<List<Course>> {
+        Log.d("MyOut", "CourseViewModel addCourses with token  <" + token+">")
+        return repository.addCourse(user, token)
+    }
+
 }

@@ -1,4 +1,4 @@
-package com.uninorte.a_202030_courseinfowithlogin.repository.api.post
+package com.uninorte.a_202030_courseinfowithlogin.service.api.post
 
 import com.uninorte.a_202030_courseinfowithlogin.model.Post
 import retrofit2.Retrofit

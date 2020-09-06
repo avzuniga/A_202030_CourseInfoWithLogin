@@ -2,7 +2,7 @@ package com.uninorte.a_202030_kotlinsimpleviewmodellivedatawithfragments.reposit
 
 import androidx.lifecycle.MutableLiveData
 import com.uninorte.a_202030_courseinfowithlogin.model.Post
-import com.uninorte.a_202030_courseinfowithlogin.repository.api.post.PostsApiService
+import com.uninorte.a_202030_courseinfowithlogin.service.api.post.PostsApiService
 
 class PostRepository {
     var logged = MutableLiveData<Boolean>()

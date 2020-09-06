@@ -34,9 +34,10 @@ class LoginFragment : Fragment() {
 
 
         view.findViewById<Button>(R.id.signInButton).setOnClickListener {
-            val email : String =  "334dd@33.com"
+            val email : String =  "augusto@a.com"
             val clave : String = "123456"
-            loginViewModel.signIn(email,clave).observe(getViewLifecycleOwner(), Observer { user ->
+            val usuario : String = "elprofesor"
+            loginViewModel.signIn(email,clave,usuario).observe(getViewLifecycleOwner(), Observer { user ->
 
                 Log.d("MyOut", "Fragment  signIn " + user + " error " + user.error)
                 theToken = user.token
@@ -51,9 +52,10 @@ class LoginFragment : Fragment() {
         }
 
         view.findViewById<Button>(R.id.signUpButton).setOnClickListener {
-            val email : String =  "334dd@33.com"
+            val email : String =  "augusto@a.com"
             val clave : String = "123456"
-            loginViewModel.signUp(email,clave).observe(getViewLifecycleOwner(), Observer { user ->
+            val usuario : String = "elprofesor"
+            loginViewModel.signUp(email,clave, usuario).observe(getViewLifecycleOwner(), Observer { user ->
 
                     Log.d("MyOut", "Fragment  signUp " + user + " error " + user.error)
                     theToken = user.token
@@ -63,9 +65,16 @@ class LoginFragment : Fragment() {
         }
 
         view.findViewById<Button>(R.id.buttonGetCourses).setOnClickListener {
-            val usuario : String = "334dd@33.com"
+            val usuario : String = "elprofesor"
             courseViewModel.getCourses(usuario,theToken).observe(getViewLifecycleOwner(), Observer { courses ->
+                Log.d("MyOut", "Fragment  userLiveData222 ")
 
+            })
+        }
+
+        view.findViewById<Button>(R.id.buttonAddCourse).setOnClickListener {
+            val usuario : String = "elprofesor"
+            courseViewModel.addCourse(usuario,theToken).observe(getViewLifecycleOwner(), Observer { courses ->
                 Log.d("MyOut", "Fragment  userLiveData222 ")
 
             })

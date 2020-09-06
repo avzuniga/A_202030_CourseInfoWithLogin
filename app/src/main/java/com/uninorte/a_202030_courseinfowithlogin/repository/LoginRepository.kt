@@ -1,12 +1,9 @@
 package com.uninorte.a_202030_courseinfowithlogin.repository
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.liveData
-import com.uninorte.a_202030_courseinfowithlogin.repository.api.login.LoginApiService
+import com.uninorte.a_202030_courseinfowithlogin.service.api.login.LoginApiService
 import com.uninorte.a_202030_courseinfowithlogin.model.User
-import java.util.concurrent.Flow
 
 class LoginRepository {
 

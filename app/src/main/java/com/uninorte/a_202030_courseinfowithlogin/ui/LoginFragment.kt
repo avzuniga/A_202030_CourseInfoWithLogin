@@ -67,15 +67,15 @@ class LoginFragment : Fragment() {
         view.findViewById<Button>(R.id.buttonGetCourses).setOnClickListener {
             val usuario : String = "elprofesor"
             courseViewModel.getCourses(usuario,theToken).observe(getViewLifecycleOwner(), Observer { courses ->
-                Log.d("MyOut", "Fragment  userLiveData222 ")
+                Log.d("MyOut", "Fragment courses size "+courses.size)
 
             })
         }
 
         view.findViewById<Button>(R.id.buttonAddCourse).setOnClickListener {
             val usuario : String = "elprofesor"
-            courseViewModel.addCourse(usuario,theToken).observe(getViewLifecycleOwner(), Observer { courses ->
-                Log.d("MyOut", "Fragment  userLiveData222 ")
+            courseViewModel.addCourse(usuario,theToken).observe(getViewLifecycleOwner(), Observer { course ->
+                Log.d("MyOut", "Fragment  added "+course.name)
 
             })
         }

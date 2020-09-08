@@ -10,7 +10,7 @@ interface CourseApi {
     fun getCourses(@Path("dbId") user: String, @Header ("Authorization") header: String): Call<List<Course>>
 
     @POST("{dbId}/courses")
-    fun addCourse(@Path("dbId") user: String, @Header ("Authorization") header: String): Call<List<Course>>
+    fun addCourse(@Path("dbId") user: String, @Header ("Authorization") header: String): Call<Course>
 
 
 }

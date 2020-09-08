@@ -14,11 +14,11 @@ class CourseViewModel : ViewModel() {
     private val repository = CourseRepository()
 
     fun getCourses(user: String, token: String) : MutableLiveData<List<Course>> {
-        Log.d("MyOut", "CourseViewModel getCourses with token  <" + token+">")
+        //Log.d("MyOut", "CourseViewModel getCourses with token  <" + token+">")
         return repository.getCourses(user, token)
     }
 
-    fun addCourse(user: String, token: String) : MutableLiveData<List<Course>> {
+    fun addCourse(user: String, token: String) : MutableLiveData<Course> {
         Log.d("MyOut", "CourseViewModel addCourses with token  <" + token+">")
         return repository.addCourse(user, token)
     }

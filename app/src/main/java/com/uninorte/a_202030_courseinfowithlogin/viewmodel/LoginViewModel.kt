@@ -1,11 +1,8 @@
 package com.uninorte.a_202030_courseinfowithlogin.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.*
-import com.uninorte.a_202030_courseinfowithlogin.model.Post
 import com.uninorte.a_202030_courseinfowithlogin.repository.LoginRepository
 import com.uninorte.a_202030_courseinfowithlogin.model.User
-import kotlinx.coroutines.launch
 
 class LoginViewModel : ViewModel(){
 

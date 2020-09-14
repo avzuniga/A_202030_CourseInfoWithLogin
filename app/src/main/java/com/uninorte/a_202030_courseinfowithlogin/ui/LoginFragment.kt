@@ -32,6 +32,10 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        courseViewModel.getCourseData().observe(getViewLifecycleOwner(), Observer { users ->
+            Log.d("MyOut", "Fragment  users list " + users.size)
+        })
+
 
         view.findViewById<Button>(R.id.signInButton).setOnClickListener {
             val email : String =  "augusto@a.com"
@@ -39,12 +43,13 @@ class LoginFragment : Fragment() {
             val usuario : String = "elprofesor"
             loginViewModel.signIn(email,clave,usuario).observe(getViewLifecycleOwner(), Observer { user ->
 
-                Log.d("MyOut", "Fragment  signIn " + user + " error " + user.error)
+                //Log.d("MyOut", "Fragment  signIn " + user + " error " + user.error)
                 theToken = user.token
                 if (user.token != "") {
-                    Toast.makeText(context, "Token22 " + user.token, Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, "Token " + user.token, Toast.LENGTH_LONG).show()
+                    courseViewModel.getCourses("elprofesor",theToken)
                 } else {
-                    Toast.makeText(context, "Token22 failure " + user.error, Toast.LENGTH_LONG)
+                    Toast.makeText(context, "Token failure " + user.error, Toast.LENGTH_LONG)
                         .show()
                 }
 
@@ -64,20 +69,10 @@ class LoginFragment : Fragment() {
             })
         }
 
-        view.findViewById<Button>(R.id.buttonGetCourses).setOnClickListener {
-            val usuario : String = "elprofesor"
-            courseViewModel.getCourses(usuario,theToken).observe(getViewLifecycleOwner(), Observer { courses ->
-                Log.d("MyOut", "Fragment courses size "+courses.size)
-
-            })
-        }
 
         view.findViewById<Button>(R.id.buttonAddCourse).setOnClickListener {
             val usuario : String = "elprofesor"
-            courseViewModel.addCourse(usuario,theToken).observe(getViewLifecycleOwner(), Observer { course ->
-                Log.d("MyOut", "Fragment  added "+course.name)
-
-            })
+            courseViewModel.addCourse(usuario,theToken)
         }
 
 

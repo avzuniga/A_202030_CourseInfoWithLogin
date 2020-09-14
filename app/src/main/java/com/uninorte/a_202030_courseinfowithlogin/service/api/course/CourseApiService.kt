@@ -13,6 +13,9 @@ class CourseApiService {
 
     companion object{
 
+        val theResponse = MutableLiveData<List<Course>>()
+        var courses = mutableListOf<Course>()
+
         fun getRestEngine(): CourseApi {
             val interceptor = HttpLoggingInterceptor()
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -28,9 +31,11 @@ class CourseApiService {
         }
     }
 
+    fun getCourseData() = theResponse
 
-     fun getCourses(user: String, token: String) : MutableLiveData<List<Course>>{
-        val theResponse = MutableLiveData<List<Course>>()
+
+     fun getCourses(user: String, token: String){
+
         //Log.d("MyOut", "getCourses with token  <" + token+">")
         val auth = "Bearer "+token
         getRestEngine().getCourses(user,auth).enqueue(object: Callback<List<Course>>{
@@ -39,7 +44,12 @@ class CourseApiService {
                     Log.d("MyOut", "OK isSuccessful ")
                     val loginResponse = response.body()
                     if (loginResponse != null) {
-                        theResponse.value = response.body()
+                        //theResponse.value = response.body()
+                        theResponse.postValue(response.body())
+                        courses.clear()
+                        val t = response.body() as List<Course>
+                        courses.addAll(t)
+                        theResponse.postValue(courses)
                     }
                 } else {
                     Log.d("MyOut", "NOK  "+response.code() )
@@ -54,11 +64,10 @@ class CourseApiService {
 
         })
 
-        return theResponse
     }
 
-    fun addCourse(user: String, token: String) : MutableLiveData<Course>{
-        val theResponse = MutableLiveData<Course>()
+    fun addCourse(user: String, token: String) {
+
         Log.d("MyOut", "addCourse with token  <" + token+">")
         val auth = "Bearer "+token
         getRestEngine().addCourse(user,auth).enqueue(object: Callback<Course>{
@@ -67,8 +76,9 @@ class CourseApiService {
                     Log.d("MyOut", "OK isSuccessful ")
                     val loginResponse = response.body()
                     if (loginResponse != null) {
-                        theResponse.value = response.body()
                         //Log.d("MyOut", "OK isSuccessful token " )
+                        courses.add(response.body()!!)
+                        Companion.theResponse.postValue(courses)
                     }
                 } else {
                     Log.d("MyOut", "NOK  "+response.code() )
@@ -82,8 +92,6 @@ class CourseApiService {
             }
 
         })
-
-        return theResponse
     }
 
 }

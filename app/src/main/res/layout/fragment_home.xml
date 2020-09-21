@@ -4,4 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.HomeFragment"/>
+    tools:context=".ui.HomeFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="409dp"
+        android:layout_height="729dp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="112dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="COURSES"
+        android:textColor="#673AB7"
+        android:textSize="24sp"
+        tools:layout_editor_absoluteX="153dp"
+        tools:layout_editor_absoluteY="17dp" />
+
+    <Button
+        android:id="@+id/buttonAddCourse"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ADD COURSE"
+        android:textColor="#00BCD4"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="264dp"
+        tools:layout_editor_absoluteY="49dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

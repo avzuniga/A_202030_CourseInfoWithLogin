@@ -15,7 +15,7 @@ class CourseViewModel : ViewModel() {
     fun getCourses(user: String, token: String) = repository.getCourses(user, token)
 
     fun addCourse(user: String, token: String)  {
-        Log.d("MyOut", "CourseViewModel addCourses with token  <" + token+">")
+        Log.d("MyOut", "CourseViewModel addCourses with token  <$token>")
          repository.addCourse(user, token)
     }
 

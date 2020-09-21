@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -17,9 +18,9 @@ import com.uninorte.a_202030_courseinfowithlogin.viewmodel.LoginViewModel
 
 class LoginFragment : Fragment() {
 
-    val loginViewModel: LoginViewModel by activityViewModels()
-    val courseViewModel: CourseViewModel by activityViewModels()
-    var theToken : String = ""
+    private val loginViewModel: LoginViewModel by activityViewModels()
+    private val courseViewModel: CourseViewModel by activityViewModels()
+    private var theToken : String = ""
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -32,16 +33,19 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        courseViewModel.getCourseData().observe(getViewLifecycleOwner(), Observer { users ->
+        courseViewModel.getCourseData().observe(viewLifecycleOwner, Observer { users ->
             Log.d("MyOut", "Fragment  users list " + users.size)
         })
 
 
         view.findViewById<Button>(R.id.signInButton).setOnClickListener {
-            val email : String =  "augusto@a.com"
-            val clave : String = "123456"
-            val usuario : String = "elprofesor"
-            loginViewModel.signIn(email,clave,usuario).observe(getViewLifecycleOwner(), Observer { user ->
+            val emailb : EditText = view.findViewById<EditText>(R.id.textemail)
+            val email : String =  emailb.toString()
+            val claveb : EditText = view.findViewById<EditText>(R.id.textpassword)
+            val clave : String = claveb.toString()
+            val usuariob: EditText = view.findViewById<EditText>(R.id.textusuario)
+            val usuario : String = usuariob.toString()
+            loginViewModel.signIn(email,clave,usuario).observe(viewLifecycleOwner, Observer { user ->
 
                 //Log.d("MyOut", "Fragment  signIn " + user + " error " + user.error)
                 theToken = user.token
@@ -60,7 +64,7 @@ class LoginFragment : Fragment() {
             val email : String =  "augusto@a.com"
             val clave : String = "123456"
             val usuario : String = "elprofesor"
-            loginViewModel.signUp(email,clave, usuario).observe(getViewLifecycleOwner(), Observer { user ->
+            loginViewModel.signUp(email,clave, usuario).observe(viewLifecycleOwner, Observer { user ->
 
                     Log.d("MyOut", "Fragment  signUp " + user + " error " + user.error)
                     theToken = user.token
@@ -68,13 +72,6 @@ class LoginFragment : Fragment() {
 
             })
         }
-
-
-        view.findViewById<Button>(R.id.buttonAddCourse).setOnClickListener {
-            val usuario : String = "elprofesor"
-            courseViewModel.addCourse(usuario,theToken)
-        }
-
 
     }
 }

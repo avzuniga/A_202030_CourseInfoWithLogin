@@ -13,9 +13,6 @@ class LoginViewModel : ViewModel(){
     fun signIn(email: String, clave: String, usuario : String) =
         repository.signIn(User(email, clave, usuario, usuario,"",""))
 
-    fun signUp(email: String, clave: String, usuario : String) =
-        repository.signUp(User(email, clave, usuario, usuario,"",""))
-
     fun getUser() = userLiveData
 
 }

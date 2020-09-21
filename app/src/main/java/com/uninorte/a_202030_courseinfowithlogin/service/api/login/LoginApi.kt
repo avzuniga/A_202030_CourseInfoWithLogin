@@ -10,14 +10,8 @@ import retrofit2.http.POST
 
 interface LoginApi {
 
-    @POST("signup/")
-    fun signUp(@Body user: User): Call<User>
-
     @POST("signin/")
     fun signIn(@Body user: User): Call<User>
 
-    @FormUrlEncoded
-    @POST("signup/")
-    fun signUp2(@Field("email") email: String,@Field("password") password: String,@Field("username") username: String,@Field("name") name: String ): Call<ResponseBody>
 
 }

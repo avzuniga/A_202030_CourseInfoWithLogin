@@ -12,12 +12,12 @@ import androidx.fragment.app.activityViewModels
 import com.uninorte.a_202030_courseinfowithlogin.R
 import com.uninorte.a_202030_courseinfowithlogin.viewmodel.CourseViewModel
 
-/**
- * A simple [Fragment] subclass as the second destination in the navigation.
- */
+
 class HomeFragment : Fragment() {
+
     private val courseViewModel: CourseViewModel by activityViewModels()
     private var theToken : String = ""
+
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?

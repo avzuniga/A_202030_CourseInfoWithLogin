@@ -60,18 +60,7 @@ class LoginFragment : Fragment() {
             })
         }
 
-        view.findViewById<Button>(R.id.signUpButton).setOnClickListener {
-            val email : String =  "augusto@a.com"
-            val clave : String = "123456"
-            val usuario : String = "elprofesor"
-            loginViewModel.signUp(email,clave, usuario).observe(viewLifecycleOwner, Observer { user ->
 
-                    Log.d("MyOut", "Fragment  signUp " + user + " error " + user.error)
-                    theToken = user.token
-
-
-            })
-        }
 
     }
 }

@@ -60,52 +60,5 @@ class LoginApiService {
         return userResponse
     }
 
-    fun signUp(user: User) : MutableLiveData<User> {
-        val userResponse = MutableLiveData<User>()
 
-        getRestEngine().signUp(user).enqueue(object: Callback<User>{
-            override fun onResponse(call: Call<User>, response: Response<User>) {
-                if (response.isSuccessful) {
-                    Log.d("MyOut", "OK isSuccessful " + response.body())
-                    val loginResponse = response.body()
-                    if (loginResponse != null) {
-                        user.token = loginResponse.token
-                        Log.d("MyOut", "OK isSuccessful token " + user.token)
-                        userResponse.value = user
-                    }
-                } else {
-                    Log.d("MyOut", "NOK  "+response.code() )
-                    user.error = response.errorBody().toString()
-                    user.token = ""
-                    userResponse.value = user
-                }
-            }
-
-            override fun onFailure(call: Call<User>, t: Throwable) {
-                Log.d("MyOut","Failure "+t.message)
-            }
-
-        })
-
-        return userResponse
-    }
-
-    suspend fun signUp2(user: User) {
-        getRestEngine().signUp2(user.email, user.password, user.username, user.name).enqueue(object: Callback<ResponseBody>{
-            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                if (response.isSuccessful) {
-                    Log.d("MyOut", "OK isSuccessful " + response.body()?.string())
-                } else {
-                    Log.d("MyOut", "NOK  "+response.code() )
-                    // Log.d("MyOut", "NOK isNotSuccessful " + response.errorBody()?.string())
-                }
-
-            }
-
-            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                Log.d("MyOut","Failure "+t.message)
-            }
-
-        })
-    }
 }

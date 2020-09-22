@@ -9,12 +9,14 @@ import androidx.lifecycle.Observer
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.uninorte.a_202030_courseinfowithlogin.R
 import com.uninorte.a_202030_courseinfowithlogin.viewmodel.CourseViewModel
 
 
 class HomeFragment : Fragment() {
-
+    lateinit var navController: NavController
     private val courseViewModel: CourseViewModel by activityViewModels()
     private var theToken : String = ""
 
@@ -28,6 +30,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        navController = Navigation.findNavController(view)
 
         courseViewModel.getCourseData().observe(viewLifecycleOwner, Observer { users ->
             Log.d("MyOut", "Fragment  users list " + users.size)
@@ -35,6 +38,10 @@ class HomeFragment : Fragment() {
         view.findViewById<Button>(R.id.buttonAddCourse).setOnClickListener {
             val usuario : String = "elprofesor"
             courseViewModel.addCourse(usuario,theToken)
+        }
+
+        view.findViewById<Button>(R.id.logOutButton).setOnClickListener {
+            navController!!.navigate(R.id.action_secondFragment_to_loginFragment)
         }
 
     }

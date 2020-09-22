@@ -11,13 +11,16 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.uninorte.a_202030_courseinfowithlogin.R
 import com.uninorte.a_202030_courseinfowithlogin.model.User
 import com.uninorte.a_202030_courseinfowithlogin.viewmodel.CourseViewModel
 import com.uninorte.a_202030_courseinfowithlogin.viewmodel.LoginViewModel
 
 class LoginFragment : Fragment() {
-
+    lateinit var navController: NavController
     private val loginViewModel: LoginViewModel by activityViewModels()
     private val courseViewModel: CourseViewModel by activityViewModels()
     private var theToken : String = ""
@@ -32,7 +35,7 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        navController = Navigation.findNavController(view)
         courseViewModel.getCourseData().observe(viewLifecycleOwner, Observer { users ->
             Log.d("MyOut", "Fragment  users list " + users.size)
         })
@@ -40,16 +43,19 @@ class LoginFragment : Fragment() {
 
         view.findViewById<Button>(R.id.signInButton).setOnClickListener {
             val emailb : EditText = view.findViewById<EditText>(R.id.textemail)
-            val email : String =  emailb.toString()
+            val email : String =  emailb.text.toString()
             val claveb : EditText = view.findViewById<EditText>(R.id.textpassword)
-            val clave : String = claveb.toString()
+            val clave : String = claveb.text.toString()
             val usuariob: EditText = view.findViewById<EditText>(R.id.textusuario)
-            val usuario : String = usuariob.toString()
-            loginViewModel.signIn(email,clave,usuario).observe(viewLifecycleOwner, Observer { user ->
+            val usuario : String = usuariob.text.toString()
+            loginViewModel.setLogged(true)
+            val navController = findNavController()
 
+            loginViewModel.signIn(email,clave,usuario).observe(viewLifecycleOwner, Observer { user ->
                 //Log.d("MyOut", "Fragment  signIn " + user + " error " + user.error)
                 theToken = user.token
                 if (user.token != "") {
+
                     Toast.makeText(context, "Token " + user.token, Toast.LENGTH_LONG).show()
                     courseViewModel.getCourses("elprofesor",theToken)
                 } else {
@@ -60,6 +66,9 @@ class LoginFragment : Fragment() {
             })
         }
 
+        view.findViewById<Button>(R.id.signUpPassButton).setOnClickListener {
+            navController!!.navigate(R.id.action_loginFragment_to_signUpFragment)
+        }
 
 
     }

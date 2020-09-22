@@ -15,4 +15,8 @@ class LoginViewModel : ViewModel(){
 
     fun getUser() = userLiveData
 
+    fun getLogged() = repository.getLogged()
+    fun setLogged(state: Boolean){
+        repository.setLogged(state)
+    }
 }

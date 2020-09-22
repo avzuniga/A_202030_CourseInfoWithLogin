@@ -13,5 +13,4 @@ interface LoginApi {
     @POST("signin/")
     fun signIn(@Body user: User): Call<User>
 
-
 }

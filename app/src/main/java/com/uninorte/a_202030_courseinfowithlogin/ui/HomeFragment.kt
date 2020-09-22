@@ -43,6 +43,6 @@ class HomeFragment : Fragment() {
         view.findViewById<Button>(R.id.logOutButton).setOnClickListener {
             navController!!.navigate(R.id.action_secondFragment_to_loginFragment)
         }
-
     }
+
 }

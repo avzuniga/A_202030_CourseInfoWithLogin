@@ -14,10 +14,10 @@ class LoginRepository {
 
     fun getLogged() = logged as LiveData<Boolean>
 
-    init {
+    /*init {
         stateLogged = PreferenceProvider.getValue()!!
         logged.value = stateLogged;
-    }
+    }*/
 
     fun setLogged(state: Boolean){
         stateLogged = state

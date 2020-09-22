@@ -15,7 +15,6 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.uninorte.a_202030_courseinfowithlogin.R
-import com.uninorte.a_202030_courseinfowithlogin.model.User
 import com.uninorte.a_202030_courseinfowithlogin.viewmodel.CourseViewModel
 import com.uninorte.a_202030_courseinfowithlogin.viewmodel.LoginViewModel
 
@@ -48,14 +47,12 @@ class LoginFragment : Fragment() {
             val clave : String = claveb.text.toString()
             val usuariob: EditText = view.findViewById<EditText>(R.id.textusuario)
             val usuario : String = usuariob.text.toString()
-            loginViewModel.setLogged(true)
-            val navController = findNavController()
-
+            //loginViewModel.setLogged(true)
             loginViewModel.signIn(email,clave,usuario).observe(viewLifecycleOwner, Observer { user ->
                 //Log.d("MyOut", "Fragment  signIn " + user + " error " + user.error)
                 theToken = user.token
                 if (user.token != "") {
-
+                    navController!!.navigate(R.id.action_loginFragment_to_secondFragment)
                     Toast.makeText(context, "Token " + user.token, Toast.LENGTH_LONG).show()
                     courseViewModel.getCourses("elprofesor",theToken)
                 } else {

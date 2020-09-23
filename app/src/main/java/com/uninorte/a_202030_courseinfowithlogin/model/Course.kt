@@ -4,5 +4,4 @@ class Course (
     var name: String,
     var professor: String,
     var students: String
-
 )

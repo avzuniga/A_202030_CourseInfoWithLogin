@@ -16,7 +16,6 @@ import androidx.navigation.Navigation
 import com.uninorte.a_202030_courseinfowithlogin.R
 import com.uninorte.a_202030_courseinfowithlogin.viewmodel.SignUpViewModel
 
-
 class SignUpFragment : Fragment() {
     lateinit var navController: NavController
     private val signupViewModel: SignUpViewModel by activityViewModels()

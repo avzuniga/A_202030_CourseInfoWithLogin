@@ -11,6 +11,10 @@ import com.uninorte.a_202030_courseinfowithlogin.repository.LoginRepository
 class CourseViewModel : ViewModel() {
 
     private val repository = CourseRepository()
+    val courses = mutableListOf<Course>()
+    val coursesLiveData = MutableLiveData<List<Course>>()
+
+
 
     fun getCourses(user: String, token: String) = repository.getCourses(user, token)
 

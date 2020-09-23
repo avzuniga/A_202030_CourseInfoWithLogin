@@ -11,13 +11,18 @@ import android.widget.Button
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.uninorte.a_202030_courseinfowithlogin.R
+import com.uninorte.a_202030_courseinfowithlogin.model.Course
 import com.uninorte.a_202030_courseinfowithlogin.viewmodel.CourseViewModel
+import kotlinx.android.synthetic.main.fragment_home.view.*
 
 
 class HomeFragment : Fragment() {
     lateinit var navController: NavController
     private val courseViewModel: CourseViewModel by activityViewModels()
+    private val adapter = CourseAdapter(ArrayList())
+    lateinit var courses : List<Course>
     private var theToken : String = ""
 
     override fun onCreateView(
@@ -30,6 +35,18 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // requireView gets the root view for the fragment's layout
+        // (the one returned by onCreateView).
+        requireView().courses_rycler.adapter = adapter
+        requireView().courses_rycler.layoutManager = LinearLayoutManager(requireContext())
+
+        // get the live data and start observing
+        /*CourseViewModel.coursesLiveData.observe(getViewLifecycleOwner(), Observer {
+            adapter.courses.clear()
+            adapter.courses.addAll(it)
+            adapter.notifyDataSetChanged()
+        })*/
+
         navController = Navigation.findNavController(view)
 
         courseViewModel.getCourseData().observe(viewLifecycleOwner, Observer { users ->

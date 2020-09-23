@@ -7,7 +7,7 @@
     tools:context=".ui.HomeFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/courses_rycler"
         android:layout_width="409dp"
         android:layout_height="729dp"
         tools:layout_editor_absoluteX="1dp"
@@ -20,7 +20,7 @@
         android:text="COURSES"
         android:textColor="#673AB7"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        app:layout_constraintBottom_toTopOf="@+id/courses_rycler"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.325"
         tools:layout_editor_absoluteX="153dp" />

@@ -8,6 +8,7 @@ import android.view.View
 import androidx.lifecycle.Observer
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -16,11 +17,13 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.uninorte.a_202030_courseinfowithlogin.R
 import com.uninorte.a_202030_courseinfowithlogin.model.Course
 import com.uninorte.a_202030_courseinfowithlogin.viewmodel.CourseViewModel
+import com.uninorte.a_202030_courseinfowithlogin.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
 
 class HomeFragment : Fragment() {
     lateinit var navController: NavController
+    private val loginViewModel: LoginViewModel by activityViewModels()
     private val courseViewModel: CourseViewModel by activityViewModels()
     private val adapter = CourseAdapter(ArrayList())
     lateinit var courses : List<Course>
@@ -54,14 +57,31 @@ class HomeFragment : Fragment() {
             Log.d("MyOut", "Fragment  users list " + users.size)
         })
 
-        view.findViewById<Button>(R.id.buttonAddCourse).setOnClickListener {
-            val usuario : String = "elprofesor"
-            courseViewModel.addCourse(usuario,theToken)
+        view.findViewById<FloatingActionButton>(R.id.floatingActionButton).setOnClickListener {
+            loginViewModel.signIn("augusto@a.com","123456","elprofesor").observe(viewLifecycleOwner, Observer { user ->
+                //Log.d("MyOut", "Fragment  signIn " + user + " error " + user.error)
+                theToken = user.token
+                if (user.token != "") {
+                    courseViewModel.addCourse("elprofesor",theToken)
+                } else {
+                    Toast.makeText(context, "Token failure " + user.error, Toast.LENGTH_LONG).show()
+                }
+
+            })
         }
 
-        view.findViewById<FloatingActionButton>(R.id.floatingActionButton).setOnClickListener {
-            val usuario: String = "elprofesor"
-            courseViewModel.getCourses(usuario,theToken)
+        view.findViewById<Button>(R.id.buttonAddCourse).setOnClickListener {
+            loginViewModel.signIn("augusto@a.com","123456","elprofesor").observe(viewLifecycleOwner, Observer { user ->
+                //Log.d("MyOut", "Fragment  signIn " + user + " error " + user.error)
+                theToken = user.token
+                if (user.token != "") {
+                    courseViewModel.getCourses("elprofesor",theToken)
+                } else {
+                    Toast.makeText(context, "Token failure " + user.error, Toast.LENGTH_LONG).show()
+                }
+
+            })
+
         }
 
         view.findViewById<Button>(R.id.logOutButton).setOnClickListener {

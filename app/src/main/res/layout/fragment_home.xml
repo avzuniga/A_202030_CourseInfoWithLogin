@@ -70,7 +70,7 @@
         android:layout_marginTop="56dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="19dp"
-        android:text="ADD COURSE"
+        android:text="GET COURSES"
         android:textColor="#00BCD4"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/courses_rycler"

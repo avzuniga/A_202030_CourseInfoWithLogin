@@ -12,6 +12,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.uninorte.a_202030_courseinfowithlogin.R
 import com.uninorte.a_202030_courseinfowithlogin.model.Course
 import com.uninorte.a_202030_courseinfowithlogin.viewmodel.CourseViewModel
@@ -41,20 +42,26 @@ class HomeFragment : Fragment() {
         requireView().courses_rycler.layoutManager = LinearLayoutManager(requireContext())
 
         // get the live data and start observing
-        /*CourseViewModel.coursesLiveData.observe(getViewLifecycleOwner(), Observer {
+        courseViewModel.coursesLiveData.observe(getViewLifecycleOwner(), Observer {
             adapter.courses.clear()
             adapter.courses.addAll(it)
             adapter.notifyDataSetChanged()
-        })*/
+        })
 
         navController = Navigation.findNavController(view)
 
         courseViewModel.getCourseData().observe(viewLifecycleOwner, Observer { users ->
             Log.d("MyOut", "Fragment  users list " + users.size)
         })
+
         view.findViewById<Button>(R.id.buttonAddCourse).setOnClickListener {
             val usuario : String = "elprofesor"
             courseViewModel.addCourse(usuario,theToken)
+        }
+
+        view.findViewById<FloatingActionButton>(R.id.floatingActionButton).setOnClickListener {
+            val usuario: String = "elprofesor"
+            courseViewModel.getCourses(usuario,theToken)
         }
 
         view.findViewById<Button>(R.id.logOutButton).setOnClickListener {

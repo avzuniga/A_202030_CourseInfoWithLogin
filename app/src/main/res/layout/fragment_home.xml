@@ -8,22 +8,30 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/courses_rycler"
-        android:layout_width="409dp"
-        android:layout_height="729dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="112dp" />
+        android:layout_width="342dp"
+        android:layout_height="606dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/floatingActionButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonAddCourse" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="153dp"
+        android:layout_marginEnd="7dp"
         android:text="COURSES"
         android:textColor="#673AB7"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/courses_rycler"
+        app:layout_constraintEnd_toStartOf="@+id/buttonAddCourse"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.325"
-        tools:layout_editor_absoluteX="153dp" />
+        app:layout_constraintVertical_bias="0.325" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -58,12 +66,17 @@
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
         android:layout_marginTop="56dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="19dp"
         android:text="ADD COURSE"
         android:textColor="#00BCD4"
         android:textSize="18sp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="264dp" />
+        app:layout_constraintBottom_toTopOf="@+id/courses_rycler"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/logOutButton"

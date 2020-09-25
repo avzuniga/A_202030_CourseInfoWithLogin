@@ -45,7 +45,7 @@ class HomeFragment : Fragment() {
         requireView().courses_rycler.layoutManager = LinearLayoutManager(requireContext())
 
         // get the live data and start observing
-        courseViewModel.coursesLiveData.observe(getViewLifecycleOwner(), Observer {
+        courseViewModel.coursesLiveData.observe(viewLifecycleOwner, Observer {
             adapter.courses.clear()
             adapter.courses.addAll(it)
             adapter.notifyDataSetChanged()

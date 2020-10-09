@@ -20,9 +20,9 @@ class CourseViewModel : ViewModel() {
 
     fun getCourses(user: String, token: String) {
         viewModelScope.launch {
-            courses.addAll(repository.getCourses(user, token))
+            //courses.addAll(repository.addCourse(u
+            repository.addCourse(user,token)
             coursesLiveData.postValue(courses)
-
         }
     }
 

@@ -57,7 +57,7 @@ class LoginFragment : Fragment() {
                     courseViewModel.getCourses("elprofesor",theToken)
                 } else {
                     Toast.makeText(context, "Token failure " + user.error, Toast.LENGTH_LONG)
-                        .show()
+                    .show()
                 }
 
             })

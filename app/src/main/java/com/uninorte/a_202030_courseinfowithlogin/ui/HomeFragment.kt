@@ -1,5 +1,6 @@
 package com.uninorte.a_202030_courseinfowithlogin.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -28,6 +29,10 @@ class HomeFragment : Fragment() {
     private val adapter = CourseAdapter(ArrayList())
     lateinit var courses : List<Course>
     private var theToken : String = ""
+    val sharedPreferences = requireActivity().getPreferences(Context.MODE_PRIVATE)
+    val token: String = sharedPreferences.getString("token","").toString()
+    val usuario: String = sharedPreferences.getString("usuario","").toString()
+
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -45,6 +50,7 @@ class HomeFragment : Fragment() {
         requireView().courses_rycler.layoutManager = LinearLayoutManager(requireContext())
 
         // get the live data and start observing
+        courseViewModel.getCourses(usuario, token)
         courseViewModel.coursesLiveData.observe(viewLifecycleOwner, Observer {
             adapter.courses.clear()
             adapter.courses.addAll(it)
@@ -66,7 +72,6 @@ class HomeFragment : Fragment() {
                 } else {
                     Toast.makeText(context, "Token failure " + user.error, Toast.LENGTH_LONG).show()
                 }
-
             })
         }
 
